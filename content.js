@@ -7,11 +7,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         top: 0;
         left: 0;
         width: 100%;
-        padding: 10px;
-        background-color: #ffcccc;
-        color: #ff0000;
+        padding: 20px;
+        background-color: #ff5555;
+        color: #ffffff;
         text-align: center;
-        z-index: 9999;
+        font-size: 24px;
+        font-weight: bold;
+        z-index: 9999999;
       `;
       document.body.appendChild(warning);
       setTimeout(() => warning.remove(), 5000);

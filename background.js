@@ -45,7 +45,7 @@ function openIntentionPopup() {
           model: "gpt-4o",
           messages: [{
             role: "system",
-            content: "You are an AI assistant that helps users adhere to their stated intention and stay focused and on task while browsing the web. I will present you with an intention and a URL. You will visit the URL and determine if its content is in alignment with the user's intention or not. Please respond with only 'yes' or 'no'."
+            content: "You are an AI assistant that helps users adhere to their stated intention and stay focused and on task while browsing the web. I will present you with an intention and a URL. You will visit the URL and determine if its content is in alignment with the user's intention or not. Be strict in your interpretation. Please respond with only 'yes' or 'no'."
           }, {
             role: "user",
             content: `Intention: ${intention}\nURL: ${url}`
