@@ -1,0 +1,46 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore all log files
+*.log
+
+# Ignore all .DS_Store files (macOS specific)
+.DS_Store
+
+# Ignore Chrome Extension build output
+dist/
+build/
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore npm debug log
+npm-debug.log*
+
+# Ignore yarn integrity file
+.yarn-integrity
+
+# Ignore environment files that might contain secrets
+.env
+.env.local
+.env.*.local
+
+# Ignore any files with API keys or secrets
+**/config.js
+
+# Ignore zip files (often used for packaging extensions)
+*.zip
+
+# Ignore user-specific files
+*.sublime-project
+*.sublime-workspace
+
+# Ignore operating system files
+Thumbs.db
