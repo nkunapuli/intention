@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       intentionInput.value = result.intention;
     } else {
       intentionInput.value = '';
-      intentionInput.placeholder = 'No intention';
+      intentionInput.placeholder = 'No intention set.';
     }
   });
 
