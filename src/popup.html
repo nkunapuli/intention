@@ -3,14 +3,16 @@
 <head>
   <title>Set Intention</title>
   <style>
-    body { width: 300px; padding: 10px; }
-    input { width: 100%; margin-bottom: 10px; }
+    body { width: 300px; padding: 10px; font-family: Arial, sans-serif; }
+    input, button { width: 100%; margin-bottom: 10px; padding: 5px; }
+    button { cursor: pointer; }
   </style>
 </head>
 <body>
-  <h2>What is your intention for this browsing session?</h2>
-  <input type="text" id="intention" placeholder="Enter your intention">
-  <button id="save">Save Intention</button>
+  <h2>Current Intention</h2>
+  <input type="text" id="intention" placeholder="No intention.">
+  <button id="save">Save intention</button>
+  <button id="noIntention">No intention</button>
   <script src="popup.js"></script>
 </body>
 </html>

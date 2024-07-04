@@ -1,15 +1,28 @@
 function openIntentionPopup() {
     chrome.windows.create({
-      url: chrome.runtime.getURL("popup.html"),
+      url: chrome.runtime.getURL("src/popup.html"),
       type: "popup",
       width: 400,
       height: 300
     });
   }
+
+  chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.local.set({ intention: '' });
+  });
+
+  chrome.runtime.onStartup.addListener(() => {
+    chrome.storage.local.set({ intention: '' });
+    openIntentionPopup();
+  });
   
   chrome.windows.onCreated.addListener((window) => {
     if (window.type === "normal") {
-      openIntentionPopup();
+      chrome.storage.local.get(['intention'], (result) => {
+        if (!result.intention) {
+          openIntentionPopup();
+        }
+      });
     }
   });
   
