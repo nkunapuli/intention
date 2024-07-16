@@ -9,6 +9,7 @@ function openIntentionPopup() {
 
   chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({ intention: '' });
+    chrome.tabs.create({ url: chrome.runtime.getURL("src/setup.html") });
   });
 
   chrome.runtime.onStartup.addListener(() => {
@@ -33,7 +34,7 @@ function openIntentionPopup() {
           checkAlignment(tab.url, result.intention)
             .then(alignment => {
               if (alignment === false) {
-                chrome.tabs.sendMessage(tabId, {action: "showWarning", message: "This website might not align with your intention."});
+                chrome.tabs.sendMessage(tabId, {action: "showWarning", message: `Remember your intention: ${result.intention}`});
               }
             })
             .catch(error => {
@@ -46,19 +47,23 @@ function openIntentionPopup() {
   });
   
   async function checkAlignment(url, intention) {
-    const API_KEY = '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'; // Replace with your actual API key
     try {
+      const { apiKey } = await chrome.storage.local.get('apiKey');
+      if (!apiKey) {
+        throw new Error('API key not set. Please set your API key in the extension settings.');
+      }
+
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${API_KEY}`,
+          'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           model: "gpt-4o",
           messages: [{
             role: "system",
-            content: "You are an AI assistant that helps users adhere to their stated intention and stay focused and on task while browsing the web. I will present you with an intention and a URL. You will visit the URL and determine if its content is in alignment with the user's intention or not. Be strict in your interpretation. Please respond with only 'yes' or 'no'."
+            content: "You are an AI assistant that helps users adhere to their stated intention and stay focused and on task while browsing the web. I will present you with an intention and a URL. You will visit the URL and determine if its content is in alignment with the user's intention or not. Please respond with only 'yes' or 'no'."
           }, {
             role: "user",
             content: `Intention: ${intention}\nURL: ${url}`

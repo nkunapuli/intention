@@ -16,6 +16,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         z-index: 9999999;
       `;
       document.body.appendChild(warning);
-      setTimeout(() => warning.remove(), 5000);
+//      setTimeout(() => warning.remove(), 5000);
     }
   });
