@@ -3,7 +3,7 @@
     "name": "Intention",
     "version": "1.0",
     "description": "Checks if your browsing aligns with your intentions",
-    "permissions": ["storage", "tabs", "activeTab", "windows"],
+    "permissions": ["storage", "tabs", "activeTab", "windows", "notifications"],
     "host_permissions": ["<all_urls>"],
     "background": {
       "service_worker": "src/background.js",
