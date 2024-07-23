@@ -12,6 +12,12 @@ function openIntentionPopup() {
     chrome.tabs.create({ url: chrome.runtime.getURL("src/setup.html") });
   });
 
+  chrome.runtime.onMessage.addListener((request, sender, sendRespones) => {
+    if (request.action === "openPopup") {
+      openIntentionPopup();
+    }
+  });
+
   chrome.runtime.onStartup.addListener(() => {
     chrome.storage.local.set({ intention: '' });
     openIntentionPopup();
@@ -62,10 +68,11 @@ function openIntentionPopup() {
       const prompt = `
       You are an AI assistant that helps users adhere to their stated intention and stay focused and on task while browsing the web. 
       I will present you with an intention and a URL. 
-      You will visit the URL and determine if its content is generally in alignment with the user's intention or not. 
+      You will visit the URL (you have this capability) and determine if its content is generally in alignment with the user's intention or not. 
       Don't be overly strict, give the benefit of the doubt if genuinely unsure.
       But also be firm when the user is clearly distracted.
       Please respond with only 'yes' or 'no'.
+      No capitalization, no punctuation, no other words.
       `;
 
       const response = await fetch('https://api.openai.com/v1/chat/completions', {

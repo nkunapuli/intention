@@ -39,6 +39,10 @@ style.textContent = `
     opacity: 1;
     pointer-events: auto;
   }
+  .overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
   .message {
     font-size: 24px;
     font-weight: bold;
@@ -56,6 +60,27 @@ style.textContent = `
   .continue-btn:hover {
     background-color: #f0f0f0;
   }
+  .banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff5555;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    display: none;
+    z-index: 2147483647;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(-100%);
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .banner.show {
+    display: block;
+    transform: translateY(0);
+  }
 `;
 shadow.appendChild(style);
 
@@ -72,12 +97,26 @@ overlay.appendChild(message);
 // Create the continue button
 const continueBtn = document.createElement('button');
 continueBtn.className = 'continue-btn';
-continueBtn.textContent = 'Continue Anyway';
-continueBtn.addEventListener('click', () => {
-  overlay.classList.remove('show');
-});
+continueBtn.textContent = 'Ignore warning';
 overlay.appendChild(continueBtn);
 
+// Create the banner element
+const banner = document.createElement('div');
+banner.className = 'banner';
+shadow.appendChild(banner);
+
+// Handle the continue button click
+continueBtn.addEventListener('click', () => {
+  overlay.classList.add('hide');
+  setTimeout(() => {
+    overlay.classList.remove('show', 'hide');
+    banner.classList.add('show');
+    banner.textContent = message.textContent;
+    document.body.style.marginTop = `${banner.offsetHeight}px`;
+  }, 300); // Duration of the transition
+});
+
+// Listen for messages from the background script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "blockSite") {
     message.textContent = request.message;

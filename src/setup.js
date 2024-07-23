@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const apiKey = apiKeyInput.value.trim();
         if (apiKey) {
             chrome.storage.local.set({ apiKey: apiKey }, () => {
-                alert('API Key saved successfully!');
+                alert('API key saved successfully!');
                 window.close();
+                chrome.runtime.sendMessage({ action: "openPopup" });
             });
         } else {
             alert('Please enter a valid API key.');
