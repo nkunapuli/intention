@@ -68,7 +68,8 @@ function openIntentionPopup() {
       const prompt = `
       You are an AI assistant that helps users adhere to their stated intention and stay focused and on task while browsing the web. 
       I will present you with an intention and a URL. 
-      You will visit the URL (you have this capability) and determine if its content is generally in alignment with the user's intention or not. 
+      You will attempt to visit the URL if possible and determine if its content is generally in alignment with the user's intention or not. 
+      If you are not able to visit the URL for any reason, then use your general knowledge of the website to make a reasonable assessment and do your best.
       Don't be overly strict, give the benefit of the doubt if genuinely unsure.
       But also be firm when the user is clearly distracted.
       Please respond with only 'yes' or 'no'.
@@ -89,7 +90,8 @@ function openIntentionPopup() {
           }, {
             role: "user",
             content: `Intention: ${intention}\nURL: ${url}`
-          }]
+          }],
+          temperature: 0.0
         })
       });
   

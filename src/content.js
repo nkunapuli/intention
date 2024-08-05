@@ -34,6 +34,8 @@ style.textContent = `
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     pointer-events: none;
+    padding: 20px;
+    box-sizing: border-box;
   }
   .overlay.show {
     opacity: 1;
@@ -47,6 +49,8 @@ style.textContent = `
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    white-space: pre-wrap;
+    line-height: 1.5;
   }
   .continue-btn {
     background-color: white;

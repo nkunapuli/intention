@@ -44,3 +44,6 @@ npm-debug.log*
 
 # Ignore operating system files
 Thumbs.db
+
+# Ignore fine tuning dataset
+finetuning.jsonl
